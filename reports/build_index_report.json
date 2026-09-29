@@ -1,0 +1,47 @@
+{
+ "generated_at": "2026-09-29T14:01:51",
+ "docs_dir": "data/docs",
+ "collection": "legal_kb_m3",
+ "qdrant_mode": "url",
+ "chunk_strategy": "hierarchical_recursive",
+ "chunk_size_tokens": 512,
+ "chunk_overlap_tokens": 64,
+ "documents": 2951,
+ "nodes": 88681,
+ "duplicates": {
+  "unique_digests": 78781,
+  "duplicate_groups": 8764,
+  "intra_doc_extra": 0,
+  "cross_doc_extra": 9900,
+  "worst_group_size": 4,
+  "intra_doc_examples": [],
+  "key": "file_path + heading_path + text_md5"
+ },
+ "nodes_with_status_code": 88681,
+ "nodes_with_effective_date": 67248,
+ "chunk_seconds": 4.4,
+ "embedding_dimension": 1024,
+ "collection_points": 88681,
+ "collection_dimension": 1024,
+ "index_seconds": 2960.7,
+ "total_seconds": 2987.2,
+ "embed_stats": {
+  "nodes": 88681,
+  "nodes_to_embed": 88681,
+  "cache_hits": 7011,
+  "cache_stored": 78781,
+  "cache_loaded": 77724,
+  "cache_dir": "data\\.embed_cache\\bge-m3_d1024_fp16_v1",
+  "batch_size": 96,
+  "fp16": true,
+  "embedding_dimension": 1024,
+  "embedding_seconds": 2864.0,
+  "embedding_rate_nodes_per_second": 30.96,
+  "index_seconds": 95.6
+ },
+ "acceptance": {
+  "points_ge_30000": true,
+  "no_intra_doc_duplicates": true,
+  "dimension_match": true
+ }
+}

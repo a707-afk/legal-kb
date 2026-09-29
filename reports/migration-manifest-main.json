@@ -1,0 +1,407 @@
+[
+ {
+  "src": "app/agent_grader.py",
+  "dst": "src/agent_grader.py",
+  "why": "★ Grader——D5 的「证据充分性判定」组件，此前判断为「要补」",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "app/domain_router.py",
+  "dst": "src/domain_router.py",
+  "why": "★ 分库路由——D8-1 对照实验需要；此前判断为「已被删除，需重建」",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "app/llm_zhipu.py",
+  "dst": "src/llm_zhipu.py",
+  "why": "★ 智谱客户端——一代就实现了；此前计划「D2 改为智谱」",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "app/services/session_mgr.py",
+  "dst": "src/session_mgr.py",
+  "why": "★ 会话/记忆管理——此前列为 P2 缺口「无跨会话记忆」",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "app/agent/tools.py",
+  "dst": "src/agent/tools.py",
+  "why": "★ 完整工具集（14.9KB）——迁过来的 research_tools 只有 2 个工具",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "app/structured_logging.py",
+  "dst": "src/structured_logging.py",
+  "why": "结构化日志（与 src/logging_utils.py 互补）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "app/behavior_guard.py",
+  "dst": "src/behavior_guard.py",
+  "why": "行为护栏，且带完整评测（BEHAVIOR-GUARD-EVAL）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "app/retrieval_intent_boost.py",
+  "dst": "src/retrieval_intent_boost.py",
+  "why": "检索意图加权（retrieval.py 里注明「已移除」，实现仍在 main）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "app/vector_backend.py",
+  "dst": "src/vector_backend.py",
+  "why": "向量后端抽象",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "tests/test_agent_grader.py",
+  "dst": "tests/test_agent_grader.py",
+  "why": "★ Grader 的测试",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "data/domain_router_profiles.json",
+  "dst": "data/router/domain_router_profiles.json",
+  "why": "★ 路由 profile 数据——重建路由必需",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "data/domain_router_profiles_cs.json",
+  "dst": "data/router/domain_router_profiles_cs.json",
+  "why": "路由 profile（客服版）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "data/router_calibration.default.json",
+  "dst": "data/router/router_calibration.default.json",
+  "why": "路由校准参数",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "data/router_eval_golden.jsonl",
+  "dst": "eval/legacy-v3/router_eval_golden.jsonl",
+  "why": "★ 路由评测金标（80 条）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "data/eval_access_control_questions.jsonl",
+  "dst": "eval/legacy-v3/eval_access_control_questions.jsonl",
+  "why": "★ 权限实验的原始题集（42%→88.5% 那个实验）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "data/eval_hallucination.jsonl",
+  "dst": "eval/legacy-v3/eval_hallucination.jsonl",
+  "why": "幻觉评测题（8 条，零区分度那批）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/LEGACY-NOTES.md",
+  "dst": "docs/legacy-main/LEGACY-NOTES.md",
+  "why": "★ 旧版策略文档",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/DECISION-LOG.md",
+  "dst": "docs/legacy-main/DECISION-LOG.md",
+  "why": "★ 决策账本（main 版本，可能与 feature 的 docs/archive 版不同）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/PROJECT-1-AGENTIC-RAG.md",
+  "dst": "docs/legacy-main/PROJECT-1-AGENTIC-RAG.md",
+  "why": "项目一剧本",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/PROJECT-1-PLAYBOOK.md",
+  "dst": "docs/legacy-main/PROJECT-1-PLAYBOOK.md",
+  "why": "项目一手册",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/PROJECT-2-MULTI-AGENT.md",
+  "dst": "docs/legacy-main/PROJECT-2-MULTI-AGENT.md",
+  "why": "项目二剧本",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/PROJECT-2-PLAYBOOK.md",
+  "dst": "docs/legacy-main/PROJECT-2-PLAYBOOK.md",
+  "why": "项目二手册",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/STRATEGY-GUIDE.md",
+  "dst": "docs/legacy-main/STRATEGY-GUIDE.md",
+  "why": "策略指南",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/RAG-AGENT-KNOWLEDGE-MAP.md",
+  "dst": "docs/legacy-main/RAG-AGENT-KNOWLEDGE-MAP.md",
+  "why": "知识地图",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/CURRENT-PROJECT-DEEP-PLAN.md",
+  "dst": "docs/legacy-main/CURRENT-PROJECT-DEEP-PLAN.md",
+  "why": "深度计划",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "TECH-V1.md",
+  "dst": "docs/legacy-main/TECH-V1.md",
+  "why": "技术方案 v1",
+  "status": "extracted"
+ },
+ {
+  "src": "REQUIREMENTS-ONEPAGER.md",
+  "dst": "docs/legacy-main/REQUIREMENTS-ONEPAGER.md",
+  "why": "需求一页纸",
+  "status": "extracted"
+ },
+ {
+  "src": "BUILD_REPORT.md",
+  "dst": "docs/legacy-main/BUILD_REPORT.root.md",
+  "why": "构建报告（根目录版）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "旧版说明.md",
+  "dst": "docs/legacy-main/旧版说明.md",
+  "why": "旧版说明文档",
+  "status": "skip(exists)"
+ },
+ {
+  "src": ".planning/ROADMAP.md",
+  "dst": "docs/legacy-main/ROADMAP.md",
+  "why": "路线图",
+  "status": "skip(exists)"
+ },
+ {
+  "src": ".planning/STATE.md",
+  "dst": "docs/legacy-main/STATE.md",
+  "why": "项目状态",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/ACCESS-CONTROL-EVAL.md",
+  "dst": "eval/legacy-v3/ACCESS-CONTROL-EVAL.md",
+  "why": "权限评测报告",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/ACCESS-CONTROL-EVAL-QDRANT.md",
+  "dst": "eval/legacy-v3/ACCESS-CONTROL-EVAL-QDRANT.md",
+  "why": "权限评测（Qdrant）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/ROUTER-EVAL.md",
+  "dst": "eval/legacy-v3/ROUTER-EVAL.md",
+  "why": "路由评测方法",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/BEHAVIOR-GUARD-EVAL.md",
+  "dst": "eval/legacy-v3/BEHAVIOR-GUARD-EVAL.md",
+  "why": "行为护栏评测",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/G-K-METRICS-SUMMARY.md",
+  "dst": "eval/legacy-v3/G-K-METRICS-SUMMARY.md",
+  "why": "指标汇总",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/SCALE-BENCHMARKS.md",
+  "dst": "eval/legacy-v3/SCALE-BENCHMARKS.md",
+  "why": "规模压测（5070 那台机器的数据）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/EVAL-BASELINE-COMPARISON.md",
+  "dst": "eval/legacy-v3/EVAL-BASELINE-COMPARISON.md",
+  "why": "基线对照",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/router_eval_metrics_summary.json",
+  "dst": "eval/legacy-v3/router_eval_metrics_summary.json",
+  "why": "路由评测结果",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/router_eval_metrics_aggregate.csv",
+  "dst": "eval/legacy-v3/router_eval_metrics_aggregate.csv",
+  "why": "路由评测结果",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/router_eval_metrics_confusion.csv",
+  "dst": "eval/legacy-v3/router_eval_metrics_confusion.csv",
+  "why": "路由混淆矩阵",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/eval_access_control_qdrant.json",
+  "dst": "eval/legacy-v3/eval_access_control_qdrant.json",
+  "why": "权限评测原始结果",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/eval_qdrant_vs_chroma_access.json",
+  "dst": "eval/legacy-v3/eval_qdrant_vs_chroma_access.json",
+  "why": "后端对比",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/eval_behavior_guard.json",
+  "dst": "eval/legacy-v3/eval_behavior_guard.json",
+  "why": "护栏评测原始结果",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/eval_hallucination.json",
+  "dst": "eval/legacy-v3/eval_hallucination.json",
+  "why": "幻觉评测原始结果",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/eval_four_baselines_summary.json",
+  "dst": "eval/legacy-v3/eval_four_baselines_summary.json",
+  "why": "四组基线",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "docs/eval_prod_router_matrix_summary.json",
+  "dst": "eval/legacy-v3/eval_prod_router_matrix_summary.json",
+  "why": "路由矩阵",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "scripts/run_eval_router.py",
+  "dst": "eval/legacy-v3/scripts/run_eval_router.py",
+  "why": "路由评测 runner",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "scripts/run_eval_access_control.py",
+  "dst": "eval/legacy-v3/scripts/run_eval_access_control.py",
+  "why": "权限评测 runner",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "scripts/run_eval_behavior_guard.py",
+  "dst": "eval/legacy-v3/scripts/run_eval_behavior_guard.py",
+  "why": "护栏评测 runner",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "scripts/run_eval_hallucination.py",
+  "dst": "eval/legacy-v3/scripts/run_eval_hallucination.py",
+  "why": "幻觉评测 runner",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "scripts/generate_router_eval_golden.py",
+  "dst": "eval/legacy-v3/scripts/generate_router_eval_golden.py",
+  "why": "路由金标生成",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "scripts/run_eval_hybrid_rrf_production.py",
+  "dst": "eval/legacy-v3/scripts/run_eval_hybrid_rrf_production.py",
+  "why": "★ RRF 生产评测（D-04 融合实验的现成脚本）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "scripts/run_eval_four_baselines.py",
+  "dst": "eval/legacy-v3/scripts/run_eval_four_baselines.py",
+  "why": "★ 四组基线 runner（D8-1 对照实验的现成编排）",
+  "status": "skip(exists)"
+ },
+ {
+  "src": "scripts/compare_access_eval_backends.py",
+  "dst": "eval/legacy-v3/scripts/compare_access_eval_backends.py",
+  "why": "后端对比",
+  "status": "skip(exists)"
+ },
+ {
+  "path": "app/agent_graph/**",
+  "why": "旧 LangGraph 多图实现，蓝图明确不做多 Agent 实体",
+  "status": "dropped"
+ },
+ {
+  "path": "app/api/chat.py",
+  "why": "旧 chat 路由，feature 分支的 routes_rag.py 更新",
+  "status": "dropped"
+ },
+ {
+  "path": "app/llm_zhipu.py 之外的多语言/客服脚本",
+  "why": "—",
+  "status": "dropped"
+ },
+ {
+  "path": "scripts/download_cs_data.py / preprocess_cs_data.py / extract_csds.py / build_cn_index.py",
+  "why": "客服语料处理管线，法律项目不用",
+  "status": "dropped"
+ },
+ {
+  "path": "scripts/classify_intents.py / clean_cn_pipeline.py / run_cs_eval.py / reindex_cs.py",
+  "why": "客服时代脚本",
+  "status": "dropped"
+ },
+ {
+  "path": "scripts/gradio_app.py / start_dsw.sh / run_qdrant_migrate_eval.ps1",
+  "why": "DSW/Gradio 部署脚本",
+  "status": "dropped"
+ },
+ {
+  "path": "scripts/smoke_cs_retrieval.py / smoke_policy_llm_guard.py / run_policy_phase3_answer_sample.py",
+  "why": "旧冒烟脚本",
+  "status": "dropped"
+ },
+ {
+  "path": "scripts/test_embed.py / verify_enterprise_chunk_metadata.py",
+  "why": "一次性脚本",
+  "status": "dropped"
+ },
+ {
+  "path": "data/docs/** / data/docs_cs/** / data/docs_cn/** / data/bm25_cn_corpus.jsonl",
+  "why": "客服语料与课程讲义",
+  "status": "dropped"
+ },
+ {
+  "path": "data/eval_cs_*.jsonl / eval_enterprise_questions.jsonl / eval_questions.jsonl",
+  "why": "客服时代评测题",
+  "status": "dropped"
+ },
+ {
+  "path": "static/app/**",
+  "why": "前端构建产物",
+  "status": "dropped"
+ },
+ {
+  "path": "tests/server_test.py / test_agent_graph_*.py",
+  "why": "对应模块不迁",
+  "status": "dropped"
+ },
+ {
+  "path": "docs/PHASE-*-PROGRESS.md / MILESTONE-* / NEXT-MILESTONE.md / POLICY-MILESTONE-ACCEPTANCE.md",
+  "why": "过程性进度文档，价值已被 G-K-METRICS-SUMMARY 与 DECISION-LOG 覆盖",
+  "status": "dropped"
+ },
+ {
+  "path": "docs/CURRENT-STATUS.md / QDRANT-NEXT.md / qdrant_reindex.log / DATA-CORPUS-REDESIGN.md",
+  "why": "过时状态文档",
+  "status": "dropped"
+ },
+ {
+  "path": ".env.cs-agent / .env.dsw",
+  "why": "旧环境变量文件（含旧 key，不迁）",
+  "status": "dropped"
+ }
+]

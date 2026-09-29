@@ -1,0 +1,20 @@
+# PyTorch GPU 安装说明 —— 本机为 RTX 3070（Ampere / sm_86 / 8GB）
+#
+# ⚠️ 旧项目此文件写的是"RTX 50 系 / sm_120"，那是 5070 12GB 那台机器（已不在）。
+#    3070 是 sm_86，cu128 轮子兼容，无需特殊处理。
+#
+# 不要与 requirements.txt 一起 pip install -r（会覆盖 CPU 版 torch）。
+#
+# 推荐做法（在项目 venv 内）：
+#
+#   .venv/Scripts/pip uninstall -y torch torchvision torchaudio
+#   .venv/Scripts/pip install torch torchvision torchaudio \
+#       --index-url https://download.pytorch.org/whl/cu128
+#
+# 已验证：torch 2.11.0+cu128 + driver 616.92 + CUDA Toolkit 12.4 → cuda.is_available() == True
+#
+# CPU-only 机器改用：
+#   --index-url https://download.pytorch.org/whl/cpu
+#
+# 注意：本机直连 huggingface.co 被阻断，务必设
+#   HF_ENDPOINT=https://hf-mirror.com

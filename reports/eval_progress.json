@@ -1,0 +1,14 @@
+{
+ "phase": "done",
+ "configs": [
+  "baseline",
+  "currency"
+ ],
+ "done": 210,
+ "total": 210,
+ "percent": 100,
+ "elapsed_s": 300.2,
+ "report": "reports\\eval_both_report.json",
+ "updated_at": "2026-09-29T12:01:39",
+ "pid": 26692
+}

@@ -1,0 +1,49 @@
+{
+ "version": "v1",
+ "frozen_at": "2026-09-28T22:06:46",
+ "seed": 20260928,
+ "git_commit": "40720bae2570e66c42a6febc4ca844f39c7fd934",
+ "script_sha256": "ef47ce9780f38aeeb2aabd83daae1c0ae8ef29bfd8578fb012a463e62af7f32f",
+ "content_sha256": "5fa97c4be88fcb9618ad3d58c9aa687fc9a9356242618d40fb7f571350082ec8",
+ "total": 210,
+ "per_category": {
+  "A": 60,
+  "B": 40,
+  "C": 20,
+  "D": 40,
+  "E": 20,
+  "F": 30
+ },
+ "same_source_level": {
+  "A": "强（仅回归基线，不当能力证据）",
+  "B": "中",
+  "C": "弱",
+  "D": "弱（核心）",
+  "E": "弱（核心）",
+  "F": "弱"
+ },
+ "splits": {
+  "F_dev": 15,
+  "F_test": 15
+ },
+ "d_difficulty": {
+  "version_current": 20,
+  "version_enumerate": 10,
+  "version_time_travel": 10
+ },
+ "b_dropped": [],
+ "c_dropped": [],
+ "judge_types": [
+  "detect_not_effective",
+  "expected_source_recall",
+  "file_and_article_hit",
+  "hierarchy_higher_wins",
+  "multi_source_recall",
+  "should_disclaim_unknown_effectiveness",
+  "should_refuse",
+  "top1_status_code_eq",
+  "version_effective_at_year",
+  "version_set_recall"
+ ],
+ "note": "A 类同源强，只作回归基线；B/C 为手写种子经原文校验；D/E 为核心可自动判分题。评测集冻结后不得就地覆盖（见 why/04）。"
+}

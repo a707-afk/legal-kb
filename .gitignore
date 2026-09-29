@@ -1,0 +1,58 @@
+# --- 数据（体积大，不入库；用 scripts/ 重建）---
+data/raw/
+data/docs/
+data/.bm25_cache/
+data/*.pkl
+*.jsonl.tmp
+# 8.8 万节点向量缓存（可重建，单个 ~180MB）与建库进度
+data/.embed_cache/
+# 小样本端到端冒烟产物（logs/smoke_index.py 生成，可随时删）
+data/.smoke_index/
+# BM25 语料由 build_index 从 data/docs 重建，8.8 万条约几十 MB，绝不入库
+data/bm25_corpus.jsonl
+data/bm25_cn_corpus.jsonl
+# 调试缓存
+data/.dbg_cache/
+
+# --- 本地模型 ---
+# 只锚定仓库根目录的 models/（本地权重下载目录）。
+# 注意：不能写成 `models/` —— 那会连带忽略源码里的 src/db/models/（JSONL 记录模型），
+# 导致克隆后 run_agent_harness() 报 ModuleNotFoundError。
+/models/
+*.safetensors
+*.gguf
+
+# --- 密钥 ---
+.env
+.env.*
+!.env.example
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- 索引 / 容器 ---
+data/qdrant_local/
+data/qdrant_data/
+logs/
+*.db
+
+# --- 评测产物（可重建）---
+eval/results/
+eval/*_results.jsonl
+
+# --- IDE ---
+.codebuddy/
+.qoder/
+.workbuddy/
+.zcode/
+.idea/
+.vscode/
+
+# --- 本地 Agent 工作区（含个人记忆，绝不入库）---
+.workbuddy-ai/

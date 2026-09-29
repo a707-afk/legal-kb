@@ -1,0 +1,155 @@
+{
+ "baseline": {
+  "config": "baseline",
+  "n_items": 210,
+  "per_category": {
+   "A": {
+    "n": 60,
+    "judged": 60,
+    "pass": 43,
+    "skip": 0,
+    "accuracy": 0.7167
+   },
+   "B": {
+    "n": 40,
+    "judged": 40,
+    "pass": 34,
+    "skip": 0,
+    "accuracy": 0.85
+   },
+   "C": {
+    "n": 20,
+    "judged": 20,
+    "pass": 10,
+    "skip": 0,
+    "accuracy": 0.5
+   },
+   "D": {
+    "n": 40,
+    "judged": 40,
+    "pass": 16,
+    "skip": 0,
+    "accuracy": 0.4
+   },
+   "E": {
+    "n": 20,
+    "judged": 20,
+    "pass": 15,
+    "skip": 0,
+    "accuracy": 0.75
+   },
+   "F": {
+    "n": 30,
+    "judged": 15,
+    "pass": 13,
+    "skip": 15,
+    "accuracy": 0.8667
+   }
+  },
+  "overall_accuracy": 0.6718,
+  "stale_top1_rate": 0.3356,
+  "stale_top1": 50,
+  "stale_denom": 149
+ },
+ "currency": {
+  "config": "currency",
+  "n_items": 210,
+  "per_category": {
+   "A": {
+    "n": 60,
+    "judged": 60,
+    "pass": 43,
+    "skip": 0,
+    "accuracy": 0.7167
+   },
+   "B": {
+    "n": 40,
+    "judged": 40,
+    "pass": 34,
+    "skip": 0,
+    "accuracy": 0.85
+   },
+   "C": {
+    "n": 20,
+    "judged": 20,
+    "pass": 10,
+    "skip": 0,
+    "accuracy": 0.5
+   },
+   "D": {
+    "n": 40,
+    "judged": 40,
+    "pass": 34,
+    "skip": 0,
+    "accuracy": 0.85
+   },
+   "E": {
+    "n": 20,
+    "judged": 20,
+    "pass": 17,
+    "skip": 0,
+    "accuracy": 0.85
+   },
+   "F": {
+    "n": 30,
+    "judged": 15,
+    "pass": 13,
+    "skip": 15,
+    "accuracy": 0.8667
+   }
+  },
+  "overall_accuracy": 0.7744,
+  "stale_top1_rate": 0.02,
+  "stale_top1": 3,
+  "stale_denom": 150
+ },
+ "_comparison": {
+  "per_category": [
+   {
+    "category": "A",
+    "baseline": 0.7167,
+    "currency": 0.7167,
+    "delta": 0.0
+   },
+   {
+    "category": "B",
+    "baseline": 0.85,
+    "currency": 0.85,
+    "delta": 0.0
+   },
+   {
+    "category": "C",
+    "baseline": 0.5,
+    "currency": 0.5,
+    "delta": 0.0
+   },
+   {
+    "category": "D",
+    "baseline": 0.4,
+    "currency": 0.85,
+    "delta": 0.45
+   },
+   {
+    "category": "E",
+    "baseline": 0.75,
+    "currency": 0.85,
+    "delta": 0.1
+   },
+   {
+    "category": "F",
+    "baseline": 0.8667,
+    "currency": 0.8667,
+    "delta": 0.0
+   }
+  ],
+  "overall": {
+   "baseline": 0.6718,
+   "currency": 0.7744,
+   "delta": 0.1026
+  },
+  "stale_top1_rate": {
+   "baseline": 0.3356,
+   "currency": 0.02
+  }
+ }
+}

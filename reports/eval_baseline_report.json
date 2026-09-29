@@ -1,0 +1,109 @@
+{
+ "baseline": {
+  "config": "baseline",
+  "currency_rerank_enabled": false,
+  "top_k": 10,
+  "n_items": 5,
+  "elapsed_seconds": 169.6,
+  "per_category": {
+   "A": {
+    "n": 5,
+    "judged": 5,
+    "pass": 4,
+    "skip": 0,
+    "accuracy": 0.8
+   },
+   "B": {
+    "n": 0,
+    "judged": 0,
+    "pass": 0,
+    "skip": 0,
+    "accuracy": null
+   },
+   "C": {
+    "n": 0,
+    "judged": 0,
+    "pass": 0,
+    "skip": 0,
+    "accuracy": null
+   },
+   "D": {
+    "n": 0,
+    "judged": 0,
+    "pass": 0,
+    "skip": 0,
+    "accuracy": null
+   },
+   "E": {
+    "n": 0,
+    "judged": 0,
+    "pass": 0,
+    "skip": 0,
+    "accuracy": null
+   },
+   "F": {
+    "n": 0,
+    "judged": 0,
+    "pass": 0,
+    "skip": 0,
+    "accuracy": null
+   }
+  },
+  "overall_accuracy": 0.8,
+  "stale_top1_rate": 0.2,
+  "stale_top1": 1,
+  "stale_denom": 5,
+  "rows": [
+   {
+    "id": "A-0000",
+    "cat": "A",
+    "passed": true,
+    "top1": "中华人民共和国人民警察警衔条例_2c909fdd678bf17901678bf7002b054b",
+    "top1_status": 3,
+    "n_hits": 10,
+    "matched": "statute/中华人民共和国人民警察警衔条例_2c909fdd678bf17901678bf7002b054b.md"
+   },
+   {
+    "id": "A-0001",
+    "cat": "A",
+    "passed": true,
+    "top1": "中华人民共和国红十字标志使用办法_ff8080816f3e98bd016f41fab9850270",
+    "top1_status": 3,
+    "n_hits": 10,
+    "matched": "statute/中华人民共和国红十字标志使用办法_ff8080816f3e98bd016f41fab9850270.md"
+   },
+   {
+    "id": "A-0002",
+    "cat": "A",
+    "passed": true,
+    "top1": "中华人民共和国职业教育法_ff808181802d2853018044c7370108c6",
+    "top1_status": 3,
+    "n_hits": 10,
+    "matched": "statute/中华人民共和国职业教育法_ff808181802d2853018044c7370108c6.md"
+   },
+   {
+    "id": "A-0003",
+    "cat": "A",
+    "passed": false,
+    "top1": "最高人民法院关于仲裁司法审查案件报核问题的有关规定_2c90e5bb65c68cfd0167f25968bf4d40",
+    "top1_status": 2,
+    "n_hits": 10,
+    "expected": "最高人民法院关于仲裁司法审查案件报核问题的有关规定_ff8081817e8f9846017e9b0773e70132",
+    "got_top": [
+     "最高人民法院关于仲裁司法审查案件报核问题的有关规定_2c90e5bb65c68cfd0167f25968bf4d40",
+     "中华人民共和国仲裁法_58d7569a322b4eca9b22feaa4f5d7d4f",
+     "中华人民共和国仲裁法_2c909fdd678bf17901678bf86e5b0a69"
+    ]
+   },
+   {
+    "id": "A-0004",
+    "cat": "A",
+    "passed": true,
+    "top1": "中华人民共和国高等教育法_ff8080816f135f46016f20df64ec16c5",
+    "top1_status": 3,
+    "n_hits": 10,
+    "matched": "statute/中华人民共和国高等教育法_ff8080816f135f46016f20df64ec16c5.md"
+   }
+  ]
+ }
+}

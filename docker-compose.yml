@@ -1,0 +1,23 @@
+# 法律合规知识库 —— 本地开发编排
+#
+# 设计：**只起 Qdrant 一个服务**。
+#   - 不用 Postgres：检索型项目没有业务库需求（旧项目的多租户/工单表已删）
+#   - 不用 Redis：单机项目用进程内 LRU 缓存即可（旧项目的 L2 缓存已删）
+#   - 不用 worker：无异步批处理需求（旧项目的 Celery 已删）
+#
+# 端口说明：18333 而非 16333 —— 16333 落在 Windows 保留端口段，绑定会失败。
+# 本项目只保留检索所需的最小编排；旧项目的完整版（含 postgres/redis/app/worker）不迁移。
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: legal-kb-qdrant
+    ports:
+      # 只绑本机，不对外暴露
+      - "127.0.0.1:18333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+
+volumes:
+  qdrant_data:

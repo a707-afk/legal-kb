@@ -1,0 +1,174 @@
+{
+ "generated_at": "2026-09-28T14:37:44",
+ "n_cases": 6,
+ "results": {
+  "sensenova-6.8-flash-lite": {
+   "backend": "sensenova",
+   "n_ok": 6,
+   "n_errors": 0,
+   "latency_p50_s": 5.14,
+   "latency_mean_s": 5.33,
+   "article_precision_mean": 1.0,
+   "item_precision_mean": 0.5,
+   "cites_item_at_all": 2,
+   "rows": [
+    {
+     "q": "公司拖欠工资时，劳动者可以解除劳动合同吗？",
+     "articles_cited": 3,
+     "articles_hit": 3,
+     "article_precision": 1.0,
+     "items_cited": 2,
+     "items_hit": 2,
+     "item_precision": 1.0,
+     "answer_chars": 393,
+     "latency_ms": 6771.9,
+     "attempts": 1
+    },
+    {
+     "q": "买卖合同没有约定违约金，一方违约造成损失怎么赔？",
+     "articles_cited": 4,
+     "articles_hit": 4,
+     "article_precision": 1.0,
+     "items_cited": 0,
+     "items_hit": 0,
+     "item_precision": null,
+     "answer_chars": 417,
+     "latency_ms": 6932.5,
+     "attempts": 1
+    },
+    {
+     "q": "民事诉讼时效一般是多少年？",
+     "articles_cited": 2,
+     "articles_hit": 2,
+     "article_precision": 1.0,
+     "items_cited": 0,
+     "items_hit": 0,
+     "item_precision": null,
+     "answer_chars": 200,
+     "latency_ms": 3800.4,
+     "attempts": 1
+    },
+    {
+     "q": "用人单位违法解除劳动合同要付多少赔偿金？",
+     "articles_cited": 5,
+     "articles_hit": 5,
+     "article_precision": 1.0,
+     "items_cited": 0,
+     "items_hit": 0,
+     "item_precision": null,
+     "answer_chars": 508,
+     "latency_ms": 5195.7,
+     "attempts": 1
+    },
+    {
+     "q": "交通事故造成他人死亡的赔偿项目有哪些？",
+     "articles_cited": 2,
+     "articles_hit": 2,
+     "article_precision": 1.0,
+     "items_cited": 0,
+     "items_hit": 0,
+     "item_precision": null,
+     "answer_chars": 428,
+     "latency_ms": 5093.0,
+     "attempts": 1
+    },
+    {
+     "q": "承租人擅自转租，出租人可以解除合同吗？",
+     "articles_cited": 5,
+     "articles_hit": 5,
+     "article_precision": 1.0,
+     "items_cited": 3,
+     "items_hit": 0,
+     "item_precision": 0.0,
+     "answer_chars": 417,
+     "latency_ms": 4183.6,
+     "attempts": 1
+    }
+   ]
+  },
+  "deepseek-v4-flash": {
+   "backend": "sensenova",
+   "n_ok": 6,
+   "n_errors": 0,
+   "latency_p50_s": 3.66,
+   "latency_mean_s": 3.89,
+   "article_precision_mean": 1.0,
+   "item_precision_mean": 1.0,
+   "cites_item_at_all": 1,
+   "rows": [
+    {
+     "q": "公司拖欠工资时，劳动者可以解除劳动合同吗？",
+     "articles_cited": 3,
+     "articles_hit": 3,
+     "article_precision": 1.0,
+     "items_cited": 2,
+     "items_hit": 2,
+     "item_precision": 1.0,
+     "answer_chars": 146,
+     "latency_ms": 3708.3,
+     "attempts": 1
+    },
+    {
+     "q": "买卖合同没有约定违约金，一方违约造成损失怎么赔？",
+     "articles_cited": 2,
+     "articles_hit": 2,
+     "article_precision": 1.0,
+     "items_cited": 0,
+     "items_hit": 0,
+     "item_precision": null,
+     "answer_chars": 237,
+     "latency_ms": 4799.8,
+     "attempts": 1
+    },
+    {
+     "q": "民事诉讼时效一般是多少年？",
+     "articles_cited": 1,
+     "articles_hit": 1,
+     "article_precision": 1.0,
+     "items_cited": 0,
+     "items_hit": 0,
+     "item_precision": null,
+     "answer_chars": 61,
+     "latency_ms": 3110.7,
+     "attempts": 1
+    },
+    {
+     "q": "用人单位违法解除劳动合同要付多少赔偿金？",
+     "articles_cited": 3,
+     "articles_hit": 3,
+     "article_precision": 1.0,
+     "items_cited": 0,
+     "items_hit": 0,
+     "item_precision": null,
+     "answer_chars": 208,
+     "latency_ms": 4674.7,
+     "attempts": 1
+    },
+    {
+     "q": "交通事故造成他人死亡的赔偿项目有哪些？",
+     "articles_cited": 2,
+     "articles_hit": 2,
+     "article_precision": 1.0,
+     "items_cited": 0,
+     "items_hit": 0,
+     "item_precision": null,
+     "answer_chars": 231,
+     "latency_ms": 3609.7,
+     "attempts": 3
+    },
+    {
+     "q": "承租人擅自转租，出租人可以解除合同吗？",
+     "articles_cited": 1,
+     "articles_hit": 1,
+     "article_precision": 1.0,
+     "items_cited": 0,
+     "items_hit": 0,
+     "item_precision": null,
+     "answer_chars": 72,
+     "latency_ms": 3424.0,
+     "attempts": 2
+    }
+   ]
+  }
+ }
+}

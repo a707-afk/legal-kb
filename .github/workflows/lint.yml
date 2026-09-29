@@ -1,0 +1,19 @@
+name: Lint
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/ruff-action@v3
+        with:
+          args: "check --select E,F,I,N --ignore E501 src tests scripts"
+      - uses: astral-sh/ruff-action@v3
+        with:
+          args: "format --check src tests scripts"

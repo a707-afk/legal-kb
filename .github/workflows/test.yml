@@ -1,0 +1,59 @@
+name: Tests
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    services:
+      # 只需要 Qdrant —— 本项目不使用 Postgres / Redis（见 docker-compose.yml 说明）
+      qdrant:
+        image: qdrant/qdrant:latest
+        ports:
+          - 6333:6333
+        options: >-
+          --health-cmd "wget --spider -q http://localhost:6333/readyz"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio pytest-timeout pytest-cov ruff
+
+      - name: Lint check
+        run: ruff check --select E,F,I,N --ignore E501 src tests scripts
+
+      - name: Format check
+        run: ruff format --check src tests scripts || true
+
+      - name: Run unit tests
+        env:
+          QDRANT_URL: http://localhost:6333
+          # CI 无 GPU，强制 CPU；模型走镜像下载
+          INFERENCE_DEVICE: cpu
+          HF_ENDPOINT: https://hf-mirror.com
+        run: |
+          python -m pytest tests/ -v --tb=short --timeout=120 \
+            --cov=src --cov-report=term-missing
+
+      # TODO(D8-3)：评测闸门 —— PR 跑 30 条检索评测（纯检索零 LLM 成本），
+      #             回归 > 2pp 拒绝合并。
+      # - name: Eval gate
+      #   run: python scripts/run_eval.py --set eval/sets/smoke30.jsonl --gate-max-regression 0.02

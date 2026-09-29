@@ -1,0 +1,14 @@
+# 统一换行符，避免 Windows/Linux 协作时的 CRLF 噪音
+* text=auto eol=lf
+
+# 二进制文件不做换行转换
+*.docx binary
+*.xlsx binary
+*.zip    binary
+*.safetensors binary
+*.gguf   binary
+*.pkl    binary
+
+# 数据与产物不参与 diff 统计
+data/raw/**  -diff
+*.jsonl      -diff

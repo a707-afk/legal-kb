@@ -1,0 +1,33 @@
+{
+ "cold_index_load_ms": 35805.5,
+ "queries": 2,
+ "latency_ms_all": [
+  87802.3,
+  917.3
+ ],
+ "latency_ms_p50_excluding_first": 917.3,
+ "acceptance": {
+  "cold_load_under_15s": false,
+  "hot_retrieval_under_1s": true
+ },
+ "results": [
+  {
+   "query": "如何用Python实现快速排序",
+   "repeat": 0,
+   "query_id": "q-20260929-104724-6b45b5",
+   "latency_ms": 87802.3,
+   "hits": 10,
+   "hits_with_status_code": 9,
+   "top1_status_code": 3
+  },
+  {
+   "query": "今天上海天气怎么样",
+   "repeat": 0,
+   "query_id": "q-20260929-104852-ce0bf8",
+   "latency_ms": 917.3,
+   "hits": 10,
+   "hits_with_status_code": 10,
+   "top1_status_code": 3
+  }
+ ]
+}

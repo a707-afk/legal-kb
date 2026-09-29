@@ -1,0 +1,584 @@
+{
+ "code": [
+  {
+   "src": "app/chunking.py",
+   "dst": "src/chunking.py",
+   "why": "有界切块 + 分层节点；修复过 MemoryError，有 27 个测试覆盖",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/embeddings.py",
+   "dst": "src/embeddings.py",
+   "why": "resolve_local_hf_snapshot：本地 HF 快照零网络加载，修掉首次检索数分钟挂死",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/bm25_store.py",
+   "dst": "src/bm25_store.py",
+   "why": "BM25 索引 pickle 持久化，冷建 50.9s → 二次 0.9s",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/qdrant_index_store.py",
+   "dst": "src/vector_store.py",
+   "why": "Qdrant 建库/加载",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/retrieval_pipeline.py",
+   "dst": "src/retrieval.py",
+   "why": "混合检索：min-max 与 RRF 两套融合、分库路由、检索门控",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/rerank.py",
+   "dst": "src/rerank.py",
+   "why": "重排封装",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/citation_verify.py",
+   "dst": "src/citation.py",
+   "why": "引用/溯源校验——幻觉治理核心",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/inference_device.py",
+   "dst": "src/inference_device.py",
+   "why": "auto/cuda/cpu 设备选择",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/schemas.py",
+   "dst": "src/schemas.py",
+   "why": "请求/响应模型（需裁剪电商字段）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/agent/harness.py",
+   "dst": "src/agent/harness.py",
+   "why": "自研 ReAct Harness——执行型能力载体",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/agent/research_tools.py",
+   "dst": "src/agent/research_tools.py",
+   "why": "local_search + synthesize 工具",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/agent/tool_registry.py",
+   "dst": "src/agent/tool_registry.py",
+   "why": "工具注册表",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/agent/permission_gate.py",
+   "dst": "src/agent/permission_gate.py",
+   "why": "工具权限门",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/routes_rag.py",
+   "dst": "src/api/routes_rag.py",
+   "why": "问答路由（需去 SenseNova/多租户依赖）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/agent/state.py",
+   "dst": "src/agent/state.py",
+   "why": "【v2 补】Harness 的状态定义，harness.py 依赖",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/vector_index.py",
+   "dst": "src/vector_index.py",
+   "why": "【v2 补】向量索引入口（rebuild_index / get_vector_index），多处依赖",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/retrieval_gates.py",
+   "dst": "src/gates.py",
+   "why": "【v2 补】拒答门控 evaluate_similarity_gate——D-09 的核心，81 行",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/query_rewrite.py",
+   "dst": "src/query_rewrite.py",
+   "why": "【v2 补】查询改写，E6 实验需要，125 行",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/llm.py",
+   "dst": "src/llm.py",
+   "why": "【v2 补】LLM 客户端 + 多 key 轮询，143 行（需改为智谱）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/observability.py",
+   "dst": "src/logging_utils.py",
+   "why": "【v2 补】log_structured_event——**这是结构化日志，不是 Prometheus**，是 D-17 检索链路 trace 的基础（v1 误删）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/sse.py",
+   "dst": "src/sse.py",
+   "why": "【v2 补】流式输出，P2 阶段用",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/access_prefilter.py",
+   "dst": "src/access_prefilter.py",
+   "why": "【v3 补】检索前权限过滤——**D-17 保留的能力**，且 `src/retrieval.py` 已接入调用点（line 262/288/362），不迁则检索直接崩",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/access_control.py",
+   "dst": "src/access_control.py",
+   "why": "【v3 补】权限规则与 audience 映射，被 access_prefilter 依赖，146 行",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/qwen_rerank.py",
+   "dst": "src/qwen_rerank.py",
+   "why": "【v3 补】`src/rerank.py` 依赖它，187 行",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/services/audit_service.py",
+   "dst": "src/audit_service.py",
+   "why": "【v3 补】`src/agent/permission_gate.py` 依赖它，90 行",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "app/routes_agent.py",
+   "dst": "src/api/routes_agent.py",
+   "why": "【v4 补】`/agent/ticket` + **`/agent/run`** 两个端点——**Harness 的对外 API 入口**，D5 的 Agentic 闭环需要这个入口，140 行",
+   "status": "copied (5 KB)"
+  },
+  {
+   "src": "scripts/d3_forensics_hang.py",
+   "dst": "scripts/legacy/d3_forensics_hang.py",
+   "why": "【v4 补】挂死取证脚本（faulthandler 全线程栈 + psutil 采样区分「烧 CPU」与「纯阻塞」）——方法论可复用，99 行",
+   "status": "copied (3 KB)"
+  },
+  {
+   "src": "scripts/smoke_agent_ticket.py",
+   "dst": "eval/legacy-v3/scripts/smoke_agent_ticket.py",
+   "why": "【v4 补】工单冒烟测试，作参考，129 行",
+   "status": "copied (4 KB)"
+  },
+  {
+   "src": "app/config.py",
+   "dst": "src/config_LEGACY_REFERENCE.py",
+   "why": "⚠️ **只作参考，必须重写**。479 行里大半是已删模块的配置；且它的默认值（embedding=BAAI/bge-m3）与集合维度不一致，是旧项目故障源之一",
+   "status": "skip(exists)"
+  }
+ ],
+ "tests": [
+  {
+   "src": "tests/conftest.py",
+   "dst": "tests/conftest.py",
+   "why": "测试基础设施，必须",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_chunking_guard.py",
+   "dst": "tests/test_chunking_guard.py",
+   "why": "【关键】有界切块回归保护（MemoryError 修复的守卫）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_retrieval_hang_fix.py",
+   "dst": "tests/test_retrieval_hang_fix.py",
+   "why": "【关键】挂死修复回归保护（二次调用 ≤10s 断言）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_hybrid_merge.py",
+   "dst": "tests/test_hybrid_merge.py",
+   "why": "【关键】混合合并（max/RRF）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_citation_verify.py",
+   "dst": "tests/test_citation_verify.py",
+   "why": "【关键】引用校验",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_access_prefilter.py",
+   "dst": "tests/test_access_prefilter.py",
+   "why": "【关键】权限 pre-filter——D-17 保留的能力",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_access_prefilter_security.py",
+   "dst": "tests/test_access_prefilter_security.py",
+   "why": "【关键】权限安全边界",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_retrieval_intent_boost.py",
+   "dst": "tests/test_retrieval_intent_boost.py",
+   "why": "检索意图加权",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_domain_router_embedding_mock.py",
+   "dst": "tests/test_domain_router_embedding_mock.py",
+   "why": "分库路由",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_grounding_strip.py",
+   "dst": "tests/test_grounding_strip.py",
+   "why": "grounding 剥离",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_llm_zhipu.py",
+   "dst": "tests/test_llm_zhipu.py",
+   "why": "【关键】一代就用了智谱，可直接参考",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_llm_async.py",
+   "dst": "tests/test_llm_async.py",
+   "why": "LLM 异步调用",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/test_harness_run.py",
+   "dst": "tests/test_harness_run.py",
+   "why": "Harness 端到端",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "tests/agent/test_agent_harness.py",
+   "dst": "tests/agent/test_agent_harness.py",
+   "why": "Harness 单测",
+   "status": "skip(exists)"
+  }
+ ],
+ "env": [
+  {
+   "src": "docker-compose.yml",
+   "dst": "docker-compose.yml",
+   "why": "【v2 补】起 Qdrant/Redis/Postgres；需裁剪掉已删服务",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "Dockerfile",
+   "dst": "Dockerfile",
+   "why": "【v2 补】镜像定义",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "pytest.ini",
+   "dst": "pytest.ini",
+   "why": "【v2 补】pytest 配置（pythonpath/testpaths/asyncio_mode）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": ".dockerignore",
+   "dst": ".dockerignore",
+   "why": "【v2 补】",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "requirements-torch-cuda.txt",
+   "dst": "requirements-torch-cuda.txt",
+   "why": "【v2 补】torch CUDA 版本约束",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "requirements.txt",
+   "dst": "requirements-LEGACY.txt",
+   "why": "⚠️ 【v2 补】只作参考，必须重写：含 redis/arq/sqlalchemy/alembic/prometheus 等已删依赖",
+   "status": "skip(exists)"
+  },
+  {
+   "src": ".github/workflows/lint.yml",
+   "dst": ".github/workflows/lint.yml",
+   "why": "【v2 补】CI lint",
+   "status": "skip(exists)"
+  },
+  {
+   "src": ".github/workflows/test.yml",
+   "dst": ".github/workflows/test.yml",
+   "why": "【v2 补】CI 测试——D8-3 评测闸门的起点",
+   "status": "skip(exists)"
+  }
+ ],
+ "data": [
+  {
+   "src": "raw_legal_dl/npc",
+   "dst": "data/raw/npc",
+   "why": "flk 官方原始 docx（法律 734 / 行政法规 851 / 司法解释 881）+ metadata.jsonl（含 status_code / effective_date，路线 A 的 GT 来源）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "_data_tools/LeCaRD-main/data/label",
+   "dst": "data/raw/lecard/label",
+   "why": "LeCaRD 学术金标",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "_data_tools/LeCaRD-main/data/query",
+   "dst": "data/raw/lecard/query",
+   "why": "LeCaRD 107 个查询案例",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "_data_tools/LeCaRD-main/data/corpus",
+   "dst": "data/raw/lecard/corpus",
+   "why": "LeCaRD 语料索引",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "_data_tools/LeCaRD-main/data/others",
+   "dst": "data/raw/lecard/others",
+   "why": "罪名表 / 停用词——可用于 BM25 法律术语词典",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "_data_tools/LeCaRD-main/data/candidates",
+   "dst": "data/raw/lecard/candidates",
+   "why": "⚠️ 566MB，含真实姓名 PII。**第一轮不纳入评测**，仅为将来做类案检索保留（不入 git）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "_data_tools/LawBench-main/data/zero_shot/1-1.json",
+   "dst": "data/raw/lawbench/1-1.json",
+   "why": "法条内容问答 500 条",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "_data_tools/LawBench-main/data/zero_shot/1-2.json",
+   "dst": "data/raw/lawbench/1-2.json",
+   "why": "备用扩容源",
+   "status": "skip(exists)"
+  }
+ ],
+ "legacy_ref": [
+  {
+   "src": "data/eval/legal/eval_set_v1.jsonl",
+   "dst": "eval/legacy-v3/eval_set_v1.jsonl",
+   "why": "v3 评测集 148 条——**已知同源缺陷，仅作设计参考，不得复用**",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "data/eval/legal/EVAL.md",
+   "dst": "eval/legacy-v3/EVAL.md",
+   "why": "旧评测报告（数字互相矛盾）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "data/eval/legal/baseline_v0_summary.json",
+   "dst": "eval/legacy-v3/baseline_v0_summary.json",
+   "why": "旧基线",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "data/eval/legal/baseline_e2_rerank_summary.json",
+   "dst": "eval/legacy-v3/baseline_e2_rerank_summary.json",
+   "why": "旧 E2（与基线不可比）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "data/eval/legal/case_include.json",
+   "dst": "eval/legacy-v3/case_include.json",
+   "why": "案例库金标对齐清单",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "docs/REVIEW-SESSION-LOG-20260927.md",
+   "dst": "docs/archive/REVIEW-SESSION-LOG-20260927.md",
+   "why": "执行层审查报告",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "docs/STRATEGY-REVIEW-20260928.md",
+   "dst": "docs/archive/STRATEGY-REVIEW-20260928.md",
+   "why": "战略层审查报告",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "docs/FIX-retrieval-hang-20260927.md",
+   "dst": "docs/archive/FIX-retrieval-hang-20260927.md",
+   "why": "挂死修复取证报告",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "scripts/ingest_legal_corpus.py",
+   "dst": "eval/legacy-v3/scripts/ingest_legal_corpus.py",
+   "why": "旧导入脚本——含字段名 bug（status vs status_code）与单一版本策略",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "scripts/d3_build_eval_set.py",
+   "dst": "eval/legacy-v3/scripts/d3_build_eval_set.py",
+   "why": "旧评测集构建脚本",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "scripts/d4_baseline.py",
+   "dst": "eval/legacy-v3/scripts/d4_baseline.py",
+   "why": "旧基线脚本（recall@5 口径混用）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "scripts/d4_e2_rerank_eval.py",
+   "dst": "eval/legacy-v3/scripts/d4_e2_rerank_eval.py",
+   "why": "旧重排脚本（含 abs() bug）",
+   "status": "skip(exists)"
+  },
+  {
+   "src": "scripts/verify_chunking_bounded.py",
+   "dst": "scripts/verify_chunking_bounded.py",
+   "why": "切块有界性验证——**仍然有效，继续用**",
+   "status": "skip(exists)"
+  }
+ ],
+ "tests_dropped": [
+  {
+   "path": "tests/test_cache.py",
+   "why": "对应模块 cache.py 已删（Redis）"
+  },
+  {
+   "path": "tests/test_db_async.py",
+   "why": "对应模块 db/ 已删"
+  },
+  {
+   "path": "tests/test_degradation.py",
+   "why": "对应模块 degradation.py 已删"
+  },
+  {
+   "path": "tests/test_metrics_counters.py",
+   "why": "对应模块 metrics.py 已删（Prometheus）"
+  },
+  {
+   "path": "tests/test_metrics_endpoint.py",
+   "why": "同上"
+  },
+  {
+   "path": "tests/test_sse_routes.py",
+   "why": "SSE 路由属 P2，暂不测"
+  },
+  {
+   "path": "tests/test_api_guard.py",
+   "why": "对应模块 api_guard.py 已删"
+  },
+  {
+   "path": "tests/test_health_ready.py",
+   "why": "健康检查属部署层，暂不做"
+  },
+  {
+   "path": "tests/api/**",
+   "why": "旧业务 API（documents/jobs/tickets）已删"
+  },
+  {
+   "path": "tests/db/**",
+   "why": "db 层已删"
+  },
+  {
+   "path": "tests/eval/**",
+   "why": "旧评测 runner 已删，评测体系重做"
+  },
+  {
+   "path": "tests/ingestion/**",
+   "why": "旧 ingestion pipeline 已删，导入重写"
+  },
+  {
+   "path": "tests/worker/**",
+   "why": "Celery worker 已删"
+  },
+  {
+   "path": "tests/audit_retrieval_cn.py / bench.py / e2e_validation.py / smoke_server.py",
+   "why": "工具脚本，非测试"
+  }
+ ],
+ "dropped": [
+  {
+   "path": "app/vlm.py",
+   "why": "云端 VLM/OCR 调用，项目不需要图像理解"
+  },
+  {
+   "path": "app/ingestion/**",
+   "why": "旧 ingestion pipeline（823 行），导入逻辑重写"
+  },
+  {
+   "path": "app/policy/**",
+   "why": "OPA 策略即代码引擎（572 行），个人项目伪需求"
+  },
+  {
+   "path": "app/supervisor/**",
+   "why": "监督者 Agent，属多 Agent 实体，蓝图明确不做"
+  },
+  {
+   "path": "app/worker/**",
+   "why": "Celery 任务队列，无异步批处理需求"
+  },
+  {
+   "path": "app/db/**",
+   "why": "PostgreSQL + Alembic，检索型项目无业务库需求"
+  },
+  {
+   "path": "app/multi_tenant.py",
+   "why": "多租户管理，个人项目伪需求（只保留隔离语义，见 D-17）"
+  },
+  {
+   "path": "app/access_control.py / access_prefilter.py",
+   "why": "实现不迁；但其**测试已迁**（用于验证 pre-filter 有效性），能力由 src/gates.py + payload filter 承接"
+  },
+  {
+   "path": "app/redis_client.py / cache.py",
+   "why": "Redis 依赖；单机项目用进程内 LRU"
+  },
+  {
+   "path": "app/metrics.py",
+   "why": "Prometheus 指标——对 RAG 失败归因无用（见 docs/08）"
+  },
+  {
+   "path": "app/degradation.py / input_sanitizer.py / api_guard.py",
+   "why": "电商时代的守卫逻辑"
+  },
+  {
+   "path": "app/api/**",
+   "why": "旧业务 API（documents/approvals/tickets）"
+  },
+  {
+   "path": "app/main.py / logging_config.py / qwen_rerank.py / qwen_embedding*",
+   "why": "应用装配层，随 config 一起重写；qwen_rerank 与 rerank.py 重复"
+  },
+  {
+   "path": "scripts/run_eval_*.py / seed_*.py / bench_server_models.py / rebuild_index_server.py",
+   "why": "电商时代的评测与运维脚本"
+  },
+  {
+   "path": "frontend/",
+   "why": "电商时代的 React UI（66MB 含 node_modules），UI 重做"
+  },
+  {
+   "path": "static/ / alembic/ / models/",
+   "why": "前端产物 / 数据库迁移 / 空模型目录"
+  },
+  {
+   "path": "data/bm25_cs_corpus.jsonl",
+   "why": "61MB 旧电商语料"
+  },
+  {
+   "path": "data/eval_agent_ticket.jsonl",
+   "why": "旧工单评测"
+  },
+  {
+   "path": "data/docs_research/ / data/docs/",
+   "why": "旧语料目录（空或已迁移）"
+  },
+  {
+   "path": "sitecustomize.py",
+   "why": "全局 WMI 补丁，影响本机所有 Python 进程"
+  }
+ ]
+}
