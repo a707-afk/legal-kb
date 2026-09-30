@@ -305,11 +305,19 @@ def chat_completion_full(
     *,
     temperature: float = 0.2,
     max_tokens: int | None = None,
+    tools: list[dict[str, Any]] | None = None,
+    tool_choice: Any = None,
 ) -> dict[str, Any]:
-    """调用 LLM 并返回结构化结果（含 reasoning / usage / 延迟），供 trace 使用。
+    """调用 LLM 并返回结构化结果（含 reasoning / usage / 延迟 / tool_calls），供 trace 使用。
+
+    新增 ``tools`` / ``tool_choice``（OpenAI 兼容 function-calling）：
+    传入后会一起发给后端；后端返回的 ``message.tool_calls`` 会以
+    ``[{"id", "type", "function": {"name", "arguments"}}]`` 形式回填到结果的
+    ``tool_calls`` 字段。**向后兼容**：未传时行为与旧版一致。
 
     Returns:
-        ``{"content", "reasoning", "model", "backend", "usage", "latency_ms", "attempts"}``
+        ``{"content", "reasoning", "model", "backend", "usage", "latency_ms",
+           "attempts", "tool_calls"}``
     """
     settings = get_settings()
     max_retries = getattr(settings, "llm_max_retries", 2)
@@ -332,6 +340,10 @@ def chat_completion_full(
             }
             if max_tokens is not None:
                 kwargs["max_tokens"] = max_tokens
+            if tools:
+                kwargs["tools"] = tools
+                if tool_choice is not None:
+                    kwargs["tool_choice"] = tool_choice
             resp = client.chat.completions.create(**kwargs)
             choice = resp.choices[0].message
             latency_ms = (time.perf_counter() - t0) * 1000
@@ -345,6 +357,7 @@ def chat_completion_full(
                 "usage": usage.model_dump() if usage is not None and hasattr(usage, "model_dump") else None,
                 "latency_ms": round(latency_ms, 1),
                 "attempts": attempt + 1,
+                "tool_calls": _extract_tool_calls(choice),
             }
         except Exception as exc:
             last_exc = exc
@@ -366,12 +379,62 @@ def chat_completion_full(
     raise RuntimeError(f"LLM call failed after {max_retries + 1} attempts: {last_exc}") from last_exc
 
 
-def chat_completion(system_prompt: str, user_prompt: str) -> str:
-    """调用 LLM 聊天补全，返回纯文本（`reasoning_content` 已剥离）。"""
-    return chat_completion_full(system_prompt, user_prompt)["content"]
+def chat_completion(
+    system_prompt: str,
+    user_prompt: str,
+    *,
+    tools: list[dict[str, Any]] | None = None,
+    tool_choice: Any = None,
+) -> str:
+    """调用 LLM 聊天补全，返回纯文本（`reasoning_content` 已剥离）。
+
+    传入 ``tools`` 时若后端返回 tool_calls，本函数**不**自动解析参数——
+    请改用 :func:`chat_completion_full` 拿 ``tool_calls`` 字段。
+    """
+    return chat_completion_full(
+        system_prompt, user_prompt, tools=tools, tool_choice=tool_choice,
+    )["content"]
 
 
-async def achat_completion(system_prompt: str, user_prompt: str) -> str:
+def _extract_tool_calls(choice: Any) -> list[dict[str, Any]]:
+    """从 OpenAI 兼容响应里抽出 tool_calls，统一成可序列化 dict 列表。
+
+    兼容三种形态：① SDK 对象（有 ``.function.name/.arguments``）② 原生 dict
+    ③ 空/None。抽不出来时返回 ``[]``（调用方据此回退到文本解析）。
+    """
+    raw = getattr(choice, "tool_calls", None)
+    if not raw:
+        return []
+    out: list[dict[str, Any]] = []
+    for tc in raw:
+        try:
+            fn = getattr(tc, "function", None)
+            if fn is None and isinstance(tc, dict):
+                fn = tc.get("function") or {}
+            name = getattr(fn, "name", None) if not isinstance(fn, dict) else fn.get("name")
+            args = getattr(fn, "arguments", None) if not isinstance(fn, dict) else fn.get("arguments")
+            tc_id = getattr(tc, "id", None) if not isinstance(tc, dict) else tc.get("id")
+            tc_type = getattr(tc, "type", None) if not isinstance(tc, dict) else tc.get("type")
+            if name is None and args is None:
+                continue
+            out.append({
+                "id": tc_id,
+                "type": tc_type or "function",
+                "function": {"name": name, "arguments": args},
+            })
+        except Exception:  # pragma: no cover - 防御性
+            logger.debug("Failed to normalize tool_call: %r", tc, exc_info=True)
+            continue
+    return out
+
+
+async def achat_completion(
+    system_prompt: str,
+    user_prompt: str,
+    *,
+    tools: list[dict[str, Any]] | None = None,
+    tool_choice: Any = None,
+) -> str:
     """异步 LLM 聊天补全 —— 非阻塞，使用 AsyncOpenAI + asyncio.sleep。"""
     settings = get_settings()
     max_retries = getattr(settings, "llm_max_retries", 2)
@@ -382,15 +445,20 @@ async def achat_completion(system_prompt: str, user_prompt: str) -> str:
         await asyncio.to_thread(_RATE_LIMITER.wait)  # 限流不阻塞事件循环
         try:
             client, model = _get_async_client()
-            resp = await client.chat.completions.create(
-                model=model,
-                messages=[
+            kwargs: dict[str, Any] = {
+                "model": model,
+                "messages": [
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
                 ],
-                temperature=0.2,
-                timeout=timeout_s,
-            )
+                "temperature": 0.2,
+                "timeout": timeout_s,
+            }
+            if tools:
+                kwargs["tools"] = tools
+                if tool_choice is not None:
+                    kwargs["tool_choice"] = tool_choice
+            resp = await client.chat.completions.create(**kwargs)
             choice = resp.choices[0].message
             _RATE_LIMITER.note_success()
             return (choice.content or "").strip()

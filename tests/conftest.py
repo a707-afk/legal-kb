@@ -18,3 +18,17 @@ def _reset_settings_cache():
     get_settings.cache_clear()
     yield
     get_settings.cache_clear()
+
+
+@pytest.fixture(autouse=True)
+def _isolate_trace_dir(tmp_path_factory, monkeypatch):
+    """把 TRACE_DIR 指向临时目录，禁止任何测试写入真实的 data/traces/。
+
+    Harness Phase 4 起，状态机审计事件与 metrics 会经 src.trace.traces_root()
+    落盘（默认 data/traces/）。没有这道全局隔离，跑一次全量测试就会在仓库里
+    留下几十个 {run_id}.audit.jsonl。需要精确控制落盘位置的测试（如
+    tests/test_trace.py、tests/agent/test_state_machine.py）可以再用
+    monkeypatch.setenv("TRACE_DIR", ...) 覆盖本 fixture。
+    """
+    monkeypatch.setenv("TRACE_DIR", str(tmp_path_factory.mktemp("traces")))
+    yield

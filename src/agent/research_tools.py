@@ -14,6 +14,8 @@ import logging
 from dataclasses import dataclass, field
 from typing import Any
 
+from src.agent.prompts import SYNTHESIZE_SYSTEM_PROMPT
+
 logger = logging.getLogger(__name__)
 
 
@@ -176,18 +178,7 @@ def _execute_synthesize(args: dict[str, Any]) -> ToolResult:
             f"[{i+1}] {str(ev).strip()}" for i, ev in enumerate(evidence)
         )
 
-        system = (
-            "你是一个法律合规分析综合器。根据给定的法律问题和检索到的证据片段，"
-            "生成一段连贯、客观、带引用标注的分析回答。\n"
-            "规则：\n"
-            "1. 每个事实陈述必须标注引用 [1][2] 等，对应证据序号\n"
-            "2. 只使用证据中的信息，禁止编造法条内容\n"
-            "3. 证据不足时明确说明，不得推测\n"
-            "4. 每条证据抬头带时效标注（现行有效/已修订/尚未生效/已废止/未标注 + 生效日期）："
-            "标注「尚未生效」必须说明尚未生效并给出生效日期；标注「未标注」必须说明"
-            "「时效状态未标注、无法确定是否现行有效」，不得断言现行有效\n"
-            "5. 输出仅供参考，不构成法律意见"
-        )
+        system = SYNTHESIZE_SYSTEM_PROMPT
         user = (
             f"法律问题：{question}\n\n"
             f"证据片段：\n{evidence_block}\n\n"
